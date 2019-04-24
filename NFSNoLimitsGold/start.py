@@ -65,7 +65,7 @@ def main():
 def _capture_and_pull_screenshot():
 	subprocess.call(['adb', 'shell', 'screencap', '/sdcard/screen.png'])
 	subprocess.call(['adb', 'pull', '/sdcard/screen.png', 'tmp/screen.png'])
-6
+
 def _check_assets(asset_type):
 	''' check appropriate asset_type from exiting image and return a string'''
 
