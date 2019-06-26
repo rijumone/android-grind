@@ -35,9 +35,9 @@ def main():
 		# feed this image to OCR to get the words
 		earn_txt = pytesseract.image_to_string(Image.open('tmp/screen_cropped.png'))
 		print(earn_txt)
-		if earn_txt.lower().strip().split()[0] != 'earn':
-			print('didn\'t match "earn xxxx", breaking')
-			break
+		# if earn_txt.lower().strip().split()[0] != 'earn':
+		# 	print('didn\'t match "earn xxxx", breaking')
+		# 	break
 		
 		# tap on the 'earn gold' icon
 		subprocess.call(['adb', 'shell', 'input', 'tap', '1260', '710'])
@@ -52,7 +52,9 @@ def main():
 		# time.sleep(2)
 		
 		# tap on 'X' button
-		subprocess.call(['adb', 'shell', 'input', 'tap', str(pos_X_btn[0]), str(pos_X_btn[1])])
+		# subprocess.call(['adb', 'shell', 'input', 'tap', str(pos_X_btn[0]), str(pos_X_btn[1])])
+		# press physical BACK button
+		subprocess.call(['adb', 'shell', 'input', 'keyevent', '4'])
 
 		# keep checking if screen returned after ad
 		returned_after_ad = False
@@ -91,7 +93,7 @@ def _check_assets(asset_type):
 	
 	ImageOps.crop(Image.open('tmp/screen.png'), crop_tpl).save('tmp/screen_cropped.png')
 	print(crop_tpl)
-	return pytesseract.image_to_string(Image.open('tmp/screen_cropped.png')).lower().strip()
+	return pytesseract.image_to_string(Image.open('tmp/screen_cropped.png'), lang='eng', config='--psm 7').lower().strip()
 
 def _get_pos_and_sec():
 	_capture_and_pull_screenshot()
