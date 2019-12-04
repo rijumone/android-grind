@@ -14,7 +14,7 @@ def main():
 			# twice to make sure
 			subprocess.call(['adb', 'shell', 'input', 'touchscreen', 'swipe', '1200', '600', '200', '200'])
 
-
+		"""
 		_tap_achievements_btn()
 		_capture_and_pull_screenshot()
 
@@ -25,10 +25,11 @@ def main():
 				_ = _check_assets(current)
 				print('current {}: {}'.format(current, _))
 				write_this_lst.append(_)
-			print(write_this_lst)
+			# print(write_this_lst)
 			csv_writer.writerow(write_this_lst)
 			
 		_tap_achievements_btn()
+		"""
 		# crop the image to extract only the portion with text
 		ImageOps.crop(Image.open('tmp/screen.png'), (860, 650, 120, 0)).save('tmp/screen_cropped.png')
 
@@ -48,11 +49,10 @@ def main():
 		# wait 30 seconds plus few seconds extra for the ad to complete playing
 		print('sleeping for {} seconds'.format(sleep_sec))
 		time.sleep(sleep_sec)
-		# print('sleeping for 2 seconds')
-		# time.sleep(2)
 		
 		# tap on 'X' button
 		# subprocess.call(['adb', 'shell', 'input', 'tap', str(pos_X_btn[0]), str(pos_X_btn[1])])
+		
 		# press physical BACK button
 		subprocess.call(['adb', 'shell', 'input', 'keyevent', '4'])
 
